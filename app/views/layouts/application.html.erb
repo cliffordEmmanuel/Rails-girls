@@ -24,22 +24,55 @@
             <a class="nav-link" href="/ideas">Ideas</a>
           </li>
           <li class="nav-item">
+            <%= link_to 'New Idea', new_idea_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="/pages/info">Info</a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
+
+  <p class="navbar-text float-right">
+    <% if user_signed_in? %>
+    Logged in as <strong><%= current_user.email %></strong>.
+    <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
+    <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+    <%= image_tag current_user.gravatar_url, :class => "gravatar" %>
+    <% else %>
+    <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
+    <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+    <% end %>
+  </p>
+  <li class="nav-item">
+    <%= link_to 'New Idea', new_idea_path, class: "nav-link" %>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/pages/info">Info</a>
+  </li>
+</ul>
+</div>
+</div>
+</nav>
+<div class="container">
+  <% if notice %>
+  <p class="alert alert-success"><%= notice %></p>
+  <% end %>
+  <% if alert %>
+  <p class="alert alert-danger"><%= alert %></p>
+  <% end %>
   <div class="container">
     <%= yield %>
   </div>
-  <footer>
-    <div class="container">
-      Rails Girls <%= Time.now.year %>
-    </div>
-  </footer>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</div>
+<footer>
+  <div class="container">
+    Rails Girls <%= Time.now.year %>
+  </div>
+</footer>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 </body>
 </html>
